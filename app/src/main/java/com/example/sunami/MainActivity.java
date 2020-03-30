@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TsunamiAsyncTask task = new TsunamiAsyncTask();
-        task.execute();
+        URL url = task.createUrl(USGS_REQUEST_URL);
+        task.execute(url);
     }
 
     private void updateUi(Event earthquake) {
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Event doInBackground(URL... urls) {
 
-            URL url = createUrl(USGS_REQUEST_URL);
+            URL url = urls[0];
 
             String jsonResponse = "";
             try {
